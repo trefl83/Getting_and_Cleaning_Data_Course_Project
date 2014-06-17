@@ -1,7 +1,7 @@
 ### Clean data set
 
 This data set is based on Human Activity Recognition Using Smartphones Dataset Version 1.0 available here:  
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones  
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 In the original data set there are separate files with traing and testing sample. Here they are merged.  
