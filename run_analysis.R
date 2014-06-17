@@ -41,6 +41,10 @@ my_data <- cbind(Subject = full_data$Subject, Activity = full_data$Activity, my_
 my_data$Activity <- factor(my_data$Activity)
 levels(my_data$Activity) <- activity_labels[,2]
 
+# save clean data set to csv
+
+write.csv(my_data, file = "clean_data_set.csv", row.names = FALSE)
+
 ############################################################################
 # creates a second, independent tidy data set with the average of each
 # variable for each activity and each subject
@@ -54,9 +58,25 @@ my_data$Subject <- factor(my_data$Subject)
 split_data <- split(my_data, list(my_data$Subject, my_data$Activity))
 means_data <- sapply(split_data, function(x) colMeans(x[, 3:68]))
 
-head(means_data)
+# transpose
 
 my_means <- as.data.frame(t(means_data))
 
+# update column names
 
+names(my_means) <- paste("MEAN-", names(my_means), sep="")
+
+# add factor variables
+
+row_names <- row.names(my_means)
+row.names(my_means) <- NULL
+
+names_sub <- as.factor(as.character(lapply(strsplit(row_names, split = "\\."), "[", 1)))
+names_act <- as.factor(as.character(lapply(strsplit(row_names, split = "\\."), "[", 2)))
+
+my_means <- cbind(Subject = names_sub, Activity = names_act, my_means)
+
+# write to csv file
+
+write.csv(my_means, file = "tidy_data_set.csv", row.names = FALSE)
 
